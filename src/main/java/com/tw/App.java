@@ -3,9 +3,19 @@ package com.tw;
 import java.util.Arrays;
 
 public class App implements Service {
+    private Db db = new Db();
+    private State state;
 
     private AddStudent addStudentService = new AddStudent(this);
     private BuildGradeTable buildGradeTableService = new BuildGradeTable(this);
+
+    public Db getDb() {
+        return db;
+    }
+
+    public void setDb(Db db) {
+        this.db = db;
+    }
 
     public enum State {
         ADD_STUDENT_INFO("1"), SHOW_GRADE_TABLE("2"), EXIT("3");
@@ -32,6 +42,7 @@ public class App implements Service {
     @Override
     public boolean checkCommandFormat(String input) {
         if (State.isFormatCorrect(input)) {
+            state = State.getState(input);
             return true;
         }
         return false;
@@ -45,8 +56,7 @@ public class App implements Service {
     }
 
     @Override
-    public void handleCommand(String command) {
-        State state = State.getState(command);
+    public void handleCommand() {
         switch (state) {
             case ADD_STUDENT_INFO:
                 addStudentService.main();

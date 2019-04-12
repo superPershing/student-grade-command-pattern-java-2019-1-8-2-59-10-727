@@ -7,7 +7,7 @@ public interface Service {
 
     String generatePrompt(boolean isRight);
 
-    void handleCommand(String command);
+    void handleCommand();
 
     default String readPromptFromConsole() {
         String command = null;
@@ -28,6 +28,6 @@ public interface Service {
                 command = readPromptFromConsole();
             } while (!checkCommandFormat(command));
         }
-        handleCommand(command);
+        handleCommand();
     }
 }

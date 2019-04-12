@@ -6,6 +6,9 @@ public class Grade {
     private double English;
     private double Programming;
 
+    public Grade() {
+    }
+
     public Grade(double mathematics, double chinese, double english, double programming) {
         Mathematics = mathematics;
         Chinese = chinese;

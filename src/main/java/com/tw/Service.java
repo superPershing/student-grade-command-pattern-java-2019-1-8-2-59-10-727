@@ -15,7 +15,7 @@ public interface Service {
         if (s.hasNextLine()) {
             command = s.nextLine();
         }
-        s.close();
+//        s.close();
         return command;
     }
 
@@ -26,7 +26,7 @@ public interface Service {
             do {
                 System.out.println(generatePrompt(false));
                 command = readPromptFromConsole();
-            } while (checkCommandFormat(command));
+            } while (!checkCommandFormat(command));
         }
         handleCommand(command);
     }

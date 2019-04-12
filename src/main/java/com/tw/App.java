@@ -1,13 +1,11 @@
 package com.tw;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class App implements Service {
-    private HashSet<Student> studentHashSet = new HashSet<>();
 
-    private AddStudent addStudentService = new AddStudent();
-    private BuildGradeTable buildGradeTableService = new BuildGradeTable();
+    private AddStudent addStudentService = new AddStudent(this);
+    private BuildGradeTable buildGradeTableService = new BuildGradeTable(this);
 
     public enum State {
         ADD_STUDENT_INFO("1"), SHOW_GRADE_TABLE("2"), EXIT("3");
@@ -18,12 +16,12 @@ public class App implements Service {
         }
 
         static boolean isFormatCorrect(String code) {
-            return Arrays.stream(State.values()).anyMatch(x -> x.command == code);
+            return Arrays.stream(State.values()).anyMatch(x -> x.command.equals(code));
         }
 
         static State getState(String code) {
             for (State value : State.values()) {
-                if (value.command == code) {
+                if (value.command.equals(code)) {
                     return value;
                 }
             }
